@@ -1,3 +1,3 @@
 # Gatito Book
 
-## nAngular, boas praticas na arquiteturas de formularios
+## Projeto angular do curso alura, aonde vou estudar boas praticas na arquiteturas de formularios
