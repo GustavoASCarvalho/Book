@@ -1,12 +1,24 @@
 <h4 class="text-center">Login</h4>
-<form>
+<form (ngSubmit)="login()">
   <div class="mb-3">
     <label for="nome" class="col-form-label">Nome de usúario</label>
-    <input class="form-control" id="nome" type="text" />
+    <input
+      class="form-control"
+      id="nome"
+      type="text"
+      [(ngModel)]="usuario"
+      name="usuario"
+    />
   </div>
   <div class="mb-3">
     <label for="senha" class="col-form-label">Senha</label>
-    <input type="password" class="form-control" id="senha" />
+    <input
+      type="password"
+      class="form-control"
+      id="senha"
+      [(ngModel)]="senha"
+      name="senha"
+    />
   </div>
   <div class="d-grid">
     <button type="submit" class="btn btn-primary">Entrar</button>
