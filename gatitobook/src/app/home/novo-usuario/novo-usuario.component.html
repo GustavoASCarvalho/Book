@@ -8,6 +8,14 @@
       type="email"
       formControlName="email"
     />
+    <app-mensagem
+      *ngIf="novoUsuarioForm.get('email')?.errors?.['required'] && novoUsuarioForm.get('email')?.touched"
+      mensagem="Email obrigatório"
+    ></app-mensagem>
+    <app-mensagem
+      *ngIf="novoUsuarioForm.get('email')?.errors?.['email'] && novoUsuarioForm.get('email')?.touched"
+      mensagem="Email invalido"
+    ></app-mensagem>
   </div>
   <div class="mb-3">
     <label for="nome" class="col-form-label">Nome completo</label>
@@ -17,6 +25,14 @@
       type="text"
       formControlName="fullName"
     />
+    <app-mensagem
+      *ngIf="novoUsuarioForm.get('fullName')?.errors?.['minlength'] && novoUsuarioForm.get('fullName')?.touched"
+      mensagem="Nome muito curto"
+    ></app-mensagem>
+    <app-mensagem
+      *ngIf="novoUsuarioForm.get('fullName')?.errors?.['required'] && novoUsuarioForm.get('fullName')?.touched"
+      mensagem="Nome obrigatório"
+    ></app-mensagem>
   </div>
   <div class="mb-3">
     <label for="usuario" class="col-form-label">Usuario</label>
