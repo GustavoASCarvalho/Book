@@ -22,7 +22,7 @@ export class UsuarioService {
     this.usuarioSubject.next(usuario);
   }
 
-  private retornaUsuario() {
+  retornaUsuario() {
     return this.usuarioSubject.asObservable();
   }
 
@@ -31,12 +31,12 @@ export class UsuarioService {
     this.decodificaJWT();
   }
 
-  private logout() {
+  logout() {
     this.tokenService.limpaToken();
     this.usuarioSubject.next({});
   }
 
-  private estaLogado() {
+  estaLogado() {
     return this.tokenService.possuiToken();
   }
 }
