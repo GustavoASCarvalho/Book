@@ -1,3 +1,4 @@
+import { AutenticacaoService } from 'src/app/autenticacao/autenticacao.service';
 import { UsuarioExisteService } from './usuario-existe.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -7,6 +8,7 @@ import {
   minusculoValidator,
   usuarioSenhaIguaisValidator,
 } from './novo-usuario.validator';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-novo-usuario',
@@ -17,9 +19,11 @@ export class NovoUsuarioComponent implements OnInit {
   novoUsuarioForm!: FormGroup;
 
   constructor(
+    private authService: AutenticacaoService,
     private formBuilder: FormBuilder,
     private novoUsuarioService: NovoUsuarioService,
-    private usuarioExisteService: UsuarioExisteService
+    private usuarioExisteService: UsuarioExisteService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -39,7 +43,28 @@ export class NovoUsuarioComponent implements OnInit {
   }
 
   cadastrarNovoUsuario() {
-    const novoUsuario = this.novoUsuarioForm.getRawValue() as NovoUsuario;
-    console.log(novoUsuario);
+    if (this.novoUsuarioForm.valid) {
+      const novoUsuario = this.novoUsuarioForm.getRawValue() as NovoUsuario;
+      this.novoUsuarioService.cadastraNovoUsuario(novoUsuario).subscribe(
+        () => {
+          this.authService
+            .autenticar(
+              this.novoUsuarioForm.getRawValue().userName,
+              this.novoUsuarioForm.getRawValue().password
+            )
+            .subscribe(
+              () => {
+                this.router.navigate(['animais']);
+              },
+              (err) => {
+                console.log(err);
+              }
+            );
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+    }
   }
 }
