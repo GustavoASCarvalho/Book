@@ -50,6 +50,10 @@
       *ngIf="novoUsuarioForm.get('userName')?.errors?.['required'] && novoUsuarioForm.get('userName')?.touched"
       mensagem="Nome de usuario obrigatório"
     ></app-mensagem>
+    <app-mensagem
+      *ngIf="novoUsuarioForm.get('userName')?.errors?.['usuarioExiste']"
+      mensagem="Usuario já existe"
+    ></app-mensagem>
   </div>
   <div class="mb-3">
     <label for="senha" class="col-form-label">Senha</label>
@@ -59,7 +63,13 @@
       id="senha"
       formControlName="password"
     />
+    <app-mensagem
+      *ngIf="novoUsuarioForm.errors?.['senhaIgualUsuario']"
+      mensagem="Senha deve ser diferente do usuário"
+    >
+    </app-mensagem>
   </div>
+
   <div class="d-grid">
     <button type="submit" class="btn btn-primary">Cadastrar</button>
   </div>
