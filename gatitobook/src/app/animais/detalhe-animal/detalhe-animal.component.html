@@ -12,6 +12,11 @@
           {{ animal.description }}
         </p>
       </small>
+      <i (click)="curtir()" class="fa fa-heart-o fa-2x me-2 pull-left">{{
+        animal.likes
+      }}</i>
+      <i class="fa fa-commnet-o fa-2x me-2 ms-2">{{ animal.comments }}</i>
+      <i (click)="excluir()" class="fa fa-trash-o fa-2x pull-right"></i>
     </div>
   </div>
 </div>
