@@ -1,3 +1,4 @@
+import { switchMap, tap } from 'rxjs/operators';
 import { ComentariosService } from './comentarios.service';
 import { Observable } from 'rxjs';
 import { Component, Input, OnInit } from '@angular/core';
@@ -27,5 +28,13 @@ export class ComentariosComponent implements OnInit {
     });
   }
 
-  gravar() {}
+  gravar(): void {
+    const comentario = this.comentarioForm.get('comentario')?.value ?? '';
+    this.comentarios$ = this.comentarioService
+      .incluiComentario(this.id, comentario)
+      .pipe(
+        switchMap(() => this.comentarioService.buscaComentario(this.id)),
+        tap(() => this.comentarioForm.reset())
+      );
+  }
 }
