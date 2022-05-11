@@ -11,12 +11,21 @@
         <p class="text-left break-word">
           {{ animal.description }}
         </p>
+        <div class="d-flex align-itens-center gap-4">
+          <i (click)="curtir()" class="fa fa-heart-o fa-2x me-2">{{
+            animal.likes
+          }}</i>
+          <i class="fa fa-comment-o fa-2x me-2 ms-2">{{ animal.comments }}</i>
+          <i (click)="excluir()" class="fa fa-trash-o fa-2x"></i>
+        </div>
       </small>
-      <i (click)="curtir()" class="fa fa-heart-o fa-2x me-2 pull-left">{{
-        animal.likes
-      }}</i>
-      <i class="fa fa-commnet-o fa-2x me-2 ms-2">{{ animal.comments }}</i>
-      <i (click)="excluir()" class="fa fa-trash-o fa-2x pull-right"></i>
+      <app-comentarios
+        [id]="animalId"
+        *ngIf="animal.allowComments; else warning"
+      ></app-comentarios>
+      <ng-template #warning>
+        <p>Usuário não pode comentar o animal</p>
+      </ng-template>
     </div>
   </div>
 </div>
