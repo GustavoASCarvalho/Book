@@ -1,5 +1,5 @@
 <div class="bg-white border" *ngIf="animal$ | async as animal">
-  <div class="row">
+  <div class="row p-1">
     <div class="col-lg-8">
       <app-animal
         [url]="animal.url"
@@ -12,10 +12,12 @@
           {{ animal.description }}
         </p>
         <div class="d-flex align-itens-center gap-4">
-          <i (click)="curtir()" class="fa fa-heart-o fa-2x me-2">{{
-            animal.likes
-          }}</i>
-          <i class="fa fa-comment-o fa-2x me-2 ms-2">{{ animal.comments }}</i>
+          <i (click)="curtir()" class="fa fa-heart-o fa-2x me-2"
+            ><span class="mx-1">{{ animal.likes }}</span></i
+          >
+          <i class="fa fa-comment-o fa-2x me-2 ms-2"
+            ><span class="mx-1">{{ animal.comments }}</span></i
+          >
           <i (click)="excluir()" class="fa fa-trash-o fa-2x"></i>
         </div>
       </small>
